@@ -1,2 +1,12 @@
-﻿  GameInstance.cpp
-  FlappyBird.vcxproj -> C:\Users\Yuhi\CppProj\FlappyBird\FlappyBird\x64\Debug\FlappyBird.exe
+﻿  Entity.cpp
+  FlappyBird.cpp
+  GameInstance.cpp
+  GameObject.cpp
+  GameSettings.cpp
+  Pipe.cpp
+  PipeManager.cpp
+  Player.cpp
+  Tools.cpp
+  Vector2.cpp
+  Generating Code...
+  FlappyBird.vcxproj -> C:\Users\Yuhi\ProjektSem2\FlappyBird\x64\Debug\FlappyBird.exe
