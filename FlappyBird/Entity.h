@@ -15,6 +15,7 @@ protected:
 public:
 	std::vector<Vector2> getPosition();
 	char getSprite();
+	EEntityType GetEntityType(); 
 	bool hasPosition(Vector2 pos);
 	bool hasPosition(std::vector<Vector2> posses);
 

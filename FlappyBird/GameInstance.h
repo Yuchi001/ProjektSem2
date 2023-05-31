@@ -16,5 +16,8 @@ private:
 	void GameLoop();
 	void PrintScore(); // not finished
 	void PrintBoard();
+
+	bool PrintEntities(Vector2 currentPos);
+	bool PrintUI(Vector2 currentPos);
 };
 
