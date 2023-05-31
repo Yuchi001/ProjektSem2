@@ -6,6 +6,7 @@
 #include "PipeManager.h"
 #include "Player.h"
 #include "Tools.h"
+#include "UIObject.h"
 
 using namespace std;
 
@@ -36,28 +37,54 @@ void GameInstance::PrintBoard()
 	{
 		for (int j = 0; j < boardSize.getX(); j++)
 		{
-			bool drawnEntity = false;
 			auto currentPos = Vector2(j, i);
-			for (auto gameObject : GameObjects)
-			{
-				if (gameObject->GetType() != eEntity)
-					continue;
 
-				auto entity = (Entity*)gameObject;
-				if (entity->hasPosition(currentPos))
-				{
-					cout << entity->getSprite();
-					drawnEntity = true;
-					break;
-				}
-			}
+			if (PrintUI(currentPos)) continue;
 
-			if (drawnEntity) continue;
+			if (PrintEntities(currentPos)) continue;
 
 			cout << " ";
 		}
 		cout << '\n';
 	}
+}
+
+bool GameInstance::PrintUI(Vector2 currentPos) {
+	for (auto gameObject : GameObjects)
+	{
+		if (gameObject->GetType() != eEntity)
+			continue;
+
+		auto entity = (Entity*)gameObject;
+		if (entity->GetEntityType() != eUI)
+			continue;
+
+		auto uiObject = (UIObject*)entity;
+		auto uiChar = uiObject->GetUIChar(currentPos);
+		if (uiChar != "")
+		{
+			cout << uiChar;
+			return true;
+		}
+	}
+	return false;
+}
+
+bool GameInstance::PrintEntities(Vector2 currentPos) {
+	for (auto gameObject : GameObjects)
+	{
+
+		if (gameObject->GetType() != eEntity)
+			continue;
+
+		auto entity = (Entity*)gameObject;
+		if (entity->hasPosition(currentPos))
+		{
+			cout << entity->getSprite();
+			return true;
+		}
+	}
+	return false;
 }
 
 void GameInstance::PrintScore()

@@ -8,5 +8,6 @@ enum EObjectType
 enum EEntityType
 {
 	ePipe = 0,
-	ePlayer = 1
+	ePlayer = 1,
+	eUI = 2,
 };
