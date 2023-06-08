@@ -52,16 +52,16 @@ void GameInstance::PrintBoard()
 bool GameInstance::PrintUI(Vector2 currentPos) {
 	for (auto gameObject : GameObjects)
 	{
-		if (gameObject->GetType() != eEntity)
+		if (gameObject->GetType() != EObjectType::eEntity)
 			continue;
 
 		auto entity = (Entity*)gameObject;
-		if (entity->GetEntityType() != eUI)
+		if (entity->GetEntityType() != EEntityType::eUI)
 			continue;
 
 		auto uiObject = (UIObject*)entity;
 		auto uiChar = uiObject->GetUIChar(currentPos);
-		if (uiChar != "")
+		if (uiChar != '\0')
 		{
 			cout << uiChar;
 			return true;

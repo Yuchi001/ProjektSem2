@@ -11,8 +11,9 @@ UIObject::UIObject(std::string fileName, Vector2 offset) {
 	// zapis pliku do tablicy <characters>
 }
 
-std::string UIObject::GetUIChar(Vector2 currentPos) {
+char UIObject::GetUIChar(Vector2 currentPos) {
 	// odczyt tabeli <characters> 
 	// zwracanie znaku w przypadku znalezienia pozycji <currentPos>
 	// w przypadku nieznalezienia pozycji <currentPos> zwraca "" badz '\0'
+	return '\0'; // tymczasowo zeby kompilator sie nie czepial
 }
