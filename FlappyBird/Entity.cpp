@@ -21,6 +21,10 @@ bool Entity::hasPosition(Vector2 pos)
 	return false;
 }
 
+EEntityType Entity::GetEntityType() {
+	return entityType;
+}
+
 bool Entity::hasPosition(std::vector<Vector2> poses)
 {
 	for (auto currentPos : position)
