@@ -16,6 +16,26 @@ Player::Player(std::vector<GameObject*>& gameObjects)
 	position.emplace_back(startPos);
 }
 
+int Player::getScore(int Score)
+{
+	return this->score;
+}
+
+int Player::checkScore(Vector2 currentPos)
+{
+	for (int i = 0; i < gameObjects->size(); i++)
+	{
+		auto gameObject = gameObjects->at(i);
+		if (gameObject->GetName() != "Pipe")
+			continue;
+
+		auto entity = (Entity*)gameObject;
+		
+		return entity->getPosition()[0].getX() == currentPos.getX();
+	}
+	return 0;
+}
+
 void Player::Tick()
 {
 	auto currentPos = position[0];
@@ -34,6 +54,8 @@ void Player::Tick()
 
 	if (CheckCollision(currentPos)) // no need to continue if player hit something
 		return;
+
+	score += checkScore(currentPos);
 
 	if(posToAdd > 0)
 	{

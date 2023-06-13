@@ -135,6 +135,7 @@
     <ClCompile Include="Pipe.cpp" />
     <ClCompile Include="PipeManager.cpp" />
     <ClCompile Include="Player.cpp" />
+    <ClCompile Include="ScoreManager.cpp" />
     <ClCompile Include="Tools.cpp" />
     <ClCompile Include="UIObject.cpp" />
     <ClCompile Include="Vector2.cpp" />
@@ -148,6 +149,7 @@
     <ClInclude Include="Pipe.h" />
     <ClInclude Include="PipeManager.h" />
     <ClInclude Include="Player.h" />
+    <ClInclude Include="ScoreManager.h" />
     <ClInclude Include="Tools.h" />
     <ClInclude Include="UIObject.h" />
     <ClInclude Include="Vector2.h" />

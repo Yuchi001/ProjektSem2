@@ -3,17 +3,20 @@
 #include <string>
 #include <vector>
 
+using namespace std;
+
 class UIObject : public Entity
 {
+	
 public:
-	UIObject(std::string fileName, Vector2 offset);
+    //UIObject();
+    void readUI();
+    void printEndGameBoard(int score, int highScore);
 
-	char GetUIChar(Vector2 currentPosition);
+private:
+    vector<std::vector<char> > boarD;
+    
+   
 
-	const char space = 'x';
-
-protected:
-	std::vector<std::string> characters = std::vector<std::string>();
-	Vector2 offset = Vector2(0, 0);
 };
 

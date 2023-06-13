@@ -10,15 +10,19 @@ public:
 
 	bool IsDead();
 	bool IsReady();
+	int getScore(int Score);
 
 private:
 	bool CheckCollision(Vector2 currentPos);
 	void ManageInput(Vector2 currentPos);
 	void Jump(Vector2 currentPos);
 	void Fall(Vector2 currentPos);
-
+	int checkScore(Vector2 currentPos);
 	int posToAdd = 0;
 	int posAddSpeed = 2;
+
+	int score= 0;
+	
 
 	int fallingTicks = 0;
 	int maxFallingTickSpeed = 10;

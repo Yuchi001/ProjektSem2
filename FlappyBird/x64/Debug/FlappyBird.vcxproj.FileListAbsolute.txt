@@ -1,2 +1,3 @@
 C:\Users\Yuhi\CppProj\FlappyBird\FlappyBird\x64\Debug\FlappyBird.exe
 C:\Users\Yuhi\ProjektSem2\FlappyBird\x64\Debug\FlappyBird.exe
+C:\Users\kgory\ProjektSem2-tony_workspace\FlappyBird\x64\Debug\FlappyBird.exe

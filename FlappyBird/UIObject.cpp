@@ -1,19 +1,55 @@
 #include "UIObject.h"
+#include <iostream>
 #include <string>
+#include <sstream>
 #include <vector>
+#include <fstream>
 
-UIObject::UIObject(std::string fileName, Vector2 offset) {
-	entityType = EEntityType::eUI;
-	this->offset = offset;
+using namespace std;
 
-	// ladowanie pliku <fileName>
-	// otwieranie i odczyt pliku
-	// zapis pliku do tablicy <characters>
+void UIObject::readUI()
+{
+    string line;
+    char value;
+    
+    ifstream file("FlappyBirdEndGameUI.txt");
+    while (getline(file, line)) {
+        vector<char> row;
+        istringstream iss(line);
+        while (iss >> value) {
+            row.push_back(value);
+        }
+        boarD.push_back(row);
+    }
 }
 
-char UIObject::GetUIChar(Vector2 currentPos) {
-	// odczyt tabeli <characters> 
-	// zwracanie znaku w przypadku znalezienia pozycji <currentPos>
-	// w przypadku nieznalezienia pozycji <currentPos> zwraca "" badz '\0'
-	return '\0'; // tymczasowo zeby kompilator sie nie czepial
+
+void UIObject::printEndGameBoard(int score, int highScore)
+{
+    for (int i = 0; i < boarD.size(); i++)
+    {
+        for (int j = 0; j < boarD[i].size(); j++)
+        {
+            if (boarD[i][j] == '_')
+            {
+                cout << " ";
+                continue;
+            }
+
+            if (boarD[i][j] == 'X')
+            {
+                cout << score;
+                continue;
+            }
+
+            if (boarD[i][j] == '+')
+            {
+                cout << highScore;
+                continue;
+            }
+
+            cout << boarD[i][j];
+        }
+        cout << '\n';
+    }
 }

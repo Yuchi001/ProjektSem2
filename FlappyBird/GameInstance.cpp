@@ -7,6 +7,8 @@
 #include "Player.h"
 #include "Tools.h"
 #include "UIObject.h"
+#include "ScoreManager.h"
+#include "UIObject.h"
 
 using namespace std;
 
@@ -25,9 +27,11 @@ void GameInstance::Initialize()
 {
 	MainPlayer = new Player(GameObjects);
 	PipeManagerObject = new PipeManager(GameObjects, MainPlayer);
+	ScoreManagerObject = new ScoreManager();
 
 	GameObjects.push_back(MainPlayer);
 	GameObjects.push_back(PipeManagerObject);
+	GameObjects.push_back(ScoreManagerObject);
 }
 
 void GameInstance::PrintBoard()
@@ -93,10 +97,10 @@ void GameInstance::PrintScore()
 	for (int i = 0; i < xSize; i++) cout << "=";
 	cout << '\n';
 	cout << "===";
-	cout << " Score 53 ";
+	cout << " Score: " << Score;
 	cout << '\n';
 	cout << "===";
-	cout << " High score 69 ";
+	cout << " High score: " << highScore;
 	cout << '\n';
 	for (int i = 0; i < xSize; i++) cout << "=";
 }
@@ -126,7 +130,11 @@ void GameInstance::GameLoop()
 		{
 			gameObject->SetActive(false);
 		}
+
+		UIObject::printEndGameBoard(score, highScore);
 	}
 
 	Sleep(GameSettings::refreshRate); // freezing game for x time
 }
+
+
