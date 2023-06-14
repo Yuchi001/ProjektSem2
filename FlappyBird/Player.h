@@ -10,7 +10,7 @@ public:
 
 	bool IsDead();
 	bool IsReady();
-	int getScore(int Score);
+	int getScore();
 
 private:
 	bool CheckCollision(Vector2 currentPos);
@@ -21,8 +21,8 @@ private:
 	int posToAdd = 0;
 	int posAddSpeed = 2;
 
-	int score= 0;
-	
+	int score = 0;
+	static const int SPACE_KEY = 32;
 
 	int fallingTicks = 0;
 	int maxFallingTickSpeed = 10;

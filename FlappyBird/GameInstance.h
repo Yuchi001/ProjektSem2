@@ -9,7 +9,7 @@ public:
 private:
 	Player* MainPlayer;
 	PipeManager* PipeManagerObject;
-	ScoreManager* ScoreManagerObject;
+	//ScoreManager* ScoreManagerObject;
 	std::vector<GameObject*> GameObjects = std::vector<GameObject*>();
 	bool IsPlaying = true;
 
@@ -18,8 +18,9 @@ private:
 	void PrintScore(); // not finished
 	void PrintBoard();
 	
-
 	bool PrintEntities(Vector2 currentPos);
 	bool PrintUI(Vector2 currentPos);
+
+	bool playerDied = false;
 };
 

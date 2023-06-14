@@ -16,9 +16,9 @@ Player::Player(std::vector<GameObject*>& gameObjects)
 	position.emplace_back(startPos);
 }
 
-int Player::getScore(int Score)
+int Player::getScore()
 {
-	return this->score;
+	return score;
 }
 
 int Player::checkScore(Vector2 currentPos)
@@ -90,7 +90,7 @@ void Player::Fall(Vector2 currentPos)
 
 void Player::ManageInput(Vector2 currentPos)
 {
-	if (GetKeyState('W') & 0x8000)
+	if (GetKeyState(SPACE_KEY) & 0x8000)
 	{
 		if (isReady == false)
 		{

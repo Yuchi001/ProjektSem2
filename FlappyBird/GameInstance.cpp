@@ -9,6 +9,8 @@
 #include "UIObject.h"
 #include "ScoreManager.h"
 #include "UIObject.h"
+#include "DeathUI.h"
+#include "ScoreUI.h"
 
 using namespace std;
 
@@ -27,11 +29,13 @@ void GameInstance::Initialize()
 {
 	MainPlayer = new Player(GameObjects);
 	PipeManagerObject = new PipeManager(GameObjects, MainPlayer);
-	ScoreManagerObject = new ScoreManager();
+	auto scoreUI = new ScoreUI(MainPlayer);
+	//ScoreManagerObject = new ScoreManager();
 
 	GameObjects.push_back(MainPlayer);
 	GameObjects.push_back(PipeManagerObject);
-	GameObjects.push_back(ScoreManagerObject);
+	GameObjects.push_back(scoreUI);
+	//GameObjects.push_back(ScoreManagerObject);
 }
 
 void GameInstance::PrintBoard()
@@ -93,7 +97,7 @@ bool GameInstance::PrintEntities(Vector2 currentPos) {
 
 void GameInstance::PrintScore()
 {
-	int xSize = GameSettings::boardSize_x;
+	/*int xSize = GameSettings::boardSize_x;
 	for (int i = 0; i < xSize; i++) cout << "=";
 	cout << '\n';
 	cout << "===";
@@ -102,7 +106,7 @@ void GameInstance::PrintScore()
 	cout << "===";
 	cout << " High score: " << highScore;
 	cout << '\n';
-	for (int i = 0; i < xSize; i++) cout << "=";
+	for (int i = 0; i < xSize; i++) cout << "=";*/
 }
 
 void GameInstance::GameLoop()
@@ -124,14 +128,18 @@ void GameInstance::GameLoop()
 
 	PipeManagerObject->Tick();
 
-	if (MainPlayer->IsDead())
+	if (MainPlayer->IsDead() && !playerDied)
 	{
+		playerDied = true;
 		for (auto gameObject : GameObjects)
 		{
 			gameObject->SetActive(false);
 		}
 
-		UIObject::printEndGameBoard(score, highScore);
+		auto endUI = new DeathUI(MainPlayer->getScore(), 124);
+		GameObjects.push_back(endUI);
+
+		//UIObject::printEndGameBoard(score, highScore);
 	}
 
 	Sleep(GameSettings::refreshRate); // freezing game for x time

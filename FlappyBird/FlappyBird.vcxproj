@@ -127,6 +127,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="DeathUI.cpp" />
     <ClCompile Include="Entity.cpp" />
     <ClCompile Include="FlappyBird.cpp" />
     <ClCompile Include="GameInstance.cpp" />
@@ -136,11 +137,13 @@
     <ClCompile Include="PipeManager.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="ScoreManager.cpp" />
+    <ClCompile Include="ScoreUI.cpp" />
     <ClCompile Include="Tools.cpp" />
     <ClCompile Include="UIObject.cpp" />
     <ClCompile Include="Vector2.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="DeathUI.h" />
     <ClInclude Include="Entity.h" />
     <ClInclude Include="Enums.h" />
     <ClInclude Include="GameInstance.h" />
@@ -150,6 +153,7 @@
     <ClInclude Include="PipeManager.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="ScoreManager.h" />
+    <ClInclude Include="ScoreUI.h" />
     <ClInclude Include="Tools.h" />
     <ClInclude Include="UIObject.h" />
     <ClInclude Include="Vector2.h" />

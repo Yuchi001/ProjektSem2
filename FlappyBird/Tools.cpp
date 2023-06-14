@@ -29,3 +29,17 @@ void Tools::PrintMenu()
 	std::cout << '\n';
 	for (int i = 0; i < xSize; i++) std::cout << "=";
 }
+
+
+std::vector<int> Tools::ValueToArray(int val) {
+	if (val < 10)
+		return std::vector<int>({ val });
+
+	std::vector<int> res = std::vector<int>();
+	while (val != 0) {
+		res.push_back(val % 10);
+		val /= 10;
+	}
+	reverse(res.begin(), res.end());
+	return res;
+}

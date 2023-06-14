@@ -26,6 +26,9 @@ int ScoreManager::getHighScore()
 	return highScore;
 }
 
+void ScoreManager::Tick() {
+	// todo: Do zrobienia
+}
 
 void ScoreManager::saveHighScore(int score)
 {

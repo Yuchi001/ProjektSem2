@@ -11,10 +11,10 @@ public:
 	//ScoreManager();
 	int getHighScore();
 	void saveHighScore(int score);
+	void Tick() override;
 
 private:
 	int highScore;
 	fstream file;
-	
 };
 

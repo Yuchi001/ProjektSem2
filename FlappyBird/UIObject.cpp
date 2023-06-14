@@ -4,52 +4,104 @@
 #include <sstream>
 #include <vector>
 #include <fstream>
+#include "GameSettings.h"
 
 using namespace std;
 
-void UIObject::readUI()
+UIObject::UIObject(string fileName, char errorChar) {
+    readUI(GameSettings::filePath + fileName);
+    entityType = EEntityType::eUI;
+    this->errorChar = errorChar;
+}
+
+void UIObject::readUI(string fileName)
 {
     string line;
-    char value;
+    bool offset_red = false;
+    string offset_x_str;
+    string offset_y_str;
+    int maxLineLength = 0;
+    int lines = 0;
     
-    ifstream file("FlappyBirdEndGameUI.txt");
+    ifstream file(fileName);
     while (getline(file, line)) {
-        vector<char> row;
-        istringstream iss(line);
-        while (iss >> value) {
-            row.push_back(value);
+        if (offset_red) {
+            board.push_back(line);
+            lines++;
+            maxLineLength = maxLineLength < 
+                line.length() ? 
+                line.length() : maxLineLength;
+            continue;
         }
-        boarD.push_back(row);
+
+        auto comma_index = line.find_first_of(',');
+        offset_x_str = line.substr(0, comma_index);
+        offset_y_str = line.substr(comma_index + 1);
+        offset_red = true;
     }
+
+    try {
+        auto offset_x = stoi(offset_x_str);
+        auto offset_y = stoi(offset_y_str);
+        offset_x = offset_x == 0 ? offset_x : GameSettings::boardSize_x / offset_x - (maxLineLength / 2);
+        offset_y = offset_y == 0 ? offset_y : GameSettings::boardSize_y / offset_y - (lines / 2);
+        offset = Vector2(offset_x, offset_y);
+    }
+    catch (exception e) {
+        throw new exception("Parse error");
+        exit(1);
+    }
+}
+
+char UIObject::GetUIChar(Vector2 searchedPos) {
+    for (auto y = 0; y < board.size(); y++) {
+        for (auto x = 0; x < board[y].length(); x++) {
+            auto currentPos = 
+                Vector2(x + offset.getX(), y + offset.getY());
+            if (currentPos == searchedPos) 
+                return GetConfiguredChar({y, x});
+        }
+    }
+    return '\0'; 
+}
+
+char UIObject::GetConfiguredChar(Vector2 charPos) {
+    auto currentCharacter = board[charPos.getX()][charPos.getY()];
+    if (currentCharacter == '@') return ' ';
+
+    auto childClassConfigChar = GetConfiguredChar_override(charPos);
+    if (childClassConfigChar != errorChar) return childClassConfigChar;
+
+    return currentCharacter;
 }
 
 
 void UIObject::printEndGameBoard(int score, int highScore)
 {
-    for (int i = 0; i < boarD.size(); i++)
+    /*for (int i = 0; i < board.size(); i++)
     {
-        for (int j = 0; j < boarD[i].size(); j++)
+        for (int j = 0; j < board[i].size(); j++)
         {
-            if (boarD[i][j] == '_')
+            if (board[i][j] == '_')
             {
                 cout << " ";
                 continue;
             }
 
-            if (boarD[i][j] == 'X')
+            if (board[i][j] == 'X')
             {
                 cout << score;
                 continue;
             }
 
-            if (boarD[i][j] == '+')
+            if (board[i][j] == '+')
             {
                 cout << highScore;
                 continue;
             }
 
-            cout << boarD[i][j];
+            cout << board[i][j];
         }
         cout << '\n';
-    }
+    }*/
 }

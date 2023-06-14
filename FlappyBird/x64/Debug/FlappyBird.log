@@ -1,13 +1,7 @@
-﻿  Entity.cpp
-  FlappyBird.cpp
+﻿  FlappyBird.cpp
   GameInstance.cpp
-  GameObject.cpp
-  GameSettings.cpp
-  Pipe.cpp
   PipeManager.cpp
   Player.cpp
-  Tools.cpp
-  UIObject.cpp
-  Vector2.cpp
-  Generowanie kodu...
-  FlappyBird.vcxproj -> C:\Users\kgory\ProjektSem2-tony_workspace\FlappyBird\x64\Debug\FlappyBird.exe
+  ScoreUI.cpp
+  Generating Code...
+  FlappyBird.vcxproj -> C:\Users\Yuhi\ProjektSem2\FlappyBird\x64\Debug\FlappyBird.exe
