@@ -1,7 +1,2 @@
 ﻿  FlappyBird.cpp
-  GameInstance.cpp
-  PipeManager.cpp
-  Player.cpp
-  ScoreUI.cpp
-  Generating Code...
   FlappyBird.vcxproj -> C:\Users\Yuhi\ProjektSem2\FlappyBird\x64\Debug\FlappyBird.exe

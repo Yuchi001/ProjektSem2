@@ -14,14 +14,16 @@
 
 using namespace std;
 
-void GameInstance::Start()
+bool GameInstance::Start()
 {
+	shouldRestart = false;
 	Initialize();
-
 	while (IsPlaying)
 	{
 		GameLoop();
 	}
+	Deactivate();
+	return shouldRestart;
 }
 
 
@@ -30,12 +32,10 @@ void GameInstance::Initialize()
 	MainPlayer = new Player(GameObjects);
 	PipeManagerObject = new PipeManager(GameObjects, MainPlayer);
 	auto scoreUI = new ScoreUI(MainPlayer);
-	//ScoreManagerObject = new ScoreManager();
 
 	GameObjects.push_back(MainPlayer);
 	GameObjects.push_back(PipeManagerObject);
 	GameObjects.push_back(scoreUI);
-	//GameObjects.push_back(ScoreManagerObject);
 }
 
 void GameInstance::PrintBoard()
@@ -95,18 +95,14 @@ bool GameInstance::PrintEntities(Vector2 currentPos) {
 	return false;
 }
 
-void GameInstance::PrintScore()
-{
-	/*int xSize = GameSettings::boardSize_x;
-	for (int i = 0; i < xSize; i++) cout << "=";
-	cout << '\n';
-	cout << "===";
-	cout << " Score: " << Score;
-	cout << '\n';
-	cout << "===";
-	cout << " High score: " << highScore;
-	cout << '\n';
-	for (int i = 0; i < xSize; i++) cout << "=";*/
+void GameInstance::Restart() {
+	IsPlaying = false;
+	shouldRestart = true;
+}
+
+void GameInstance::End() {
+	IsPlaying = false;
+	shouldRestart = false;
 }
 
 void GameInstance::GameLoop()
@@ -115,7 +111,6 @@ void GameInstance::GameLoop()
 
 	Tools::PrintMenu();
 	PrintBoard();
-	PrintScore();
 	cout << '\n';
 	cout << MainPlayer->getPosition()[0] << '\n' << GameObjects.size();
 	for (auto gameObject : GameObjects)
@@ -136,13 +131,16 @@ void GameInstance::GameLoop()
 			gameObject->SetActive(false);
 		}
 
-		auto endUI = new DeathUI(MainPlayer->getScore(), 124);
+		auto endUI = new DeathUI(MainPlayer->getScore(), this);
 		GameObjects.push_back(endUI);
-
-		//UIObject::printEndGameBoard(score, highScore);
 	}
 
 	Sleep(GameSettings::refreshRate); // freezing game for x time
 }
 
-
+void GameInstance::Deactivate() {
+	for (int i = 0; i < GameObjects.size(); i++)
+	{
+		GameObjects.erase(GameObjects.begin() + i);
+	}
+}

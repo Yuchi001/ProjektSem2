@@ -1,14 +1,38 @@
 #include "DeathUI.h"
 #include "Tools.h"
+#include "ScoreManager.h"
+#include <conio.h>
+#include <Windows.h>
+#include "GameInstance.h"
 
-DeathUI::DeathUI(int score, int highscore) : UIObject("FlappyBirdEndGameUI.txt") {
+DeathUI::DeathUI(int score, GameInstance* game) : UIObject("FlappyBirdEndGameUI.txt") {
 	scoreParams = Tools::ValueToArray(score);
+
+	auto highscore = ScoreManager::getHighScore();
+	if (score > highscore) {
+		highscore = score;
+		ScoreManager::saveHighScore(highscore);
+	}
 	highscoreParams = Tools::ValueToArray(highscore);
+	gameInstance = game;
 }
 
 void DeathUI::Tick() {
 	scoreCount = 0;
 	highscoreCount = 0;
+
+	if (!active) return;
+
+	if (GetKeyState(SPACE_KEY) & 0x8000)
+	{
+		this->SetActive(false);
+		gameInstance->Restart();
+	}
+	if (GetKeyState(ESC_KEY) & 0x8000)
+	{
+		this->SetActive(false);
+		gameInstance->End();
+	}
 }
 
 char DeathUI::GetConfiguredChar_override(Vector2 charPos) {

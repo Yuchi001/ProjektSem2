@@ -3,46 +3,54 @@
 #include <stdio.h>
 #include <iostream>
 #include <string> 
+#include <fstream>
 
 
 int ScoreManager::getHighScore()
 {
-	file.open("HighScore.txt", ios::in);
+	fstream file;
 	string buffor;
+	file.open("HighScore.txt", ios::in);
 
 	if (!file.good())
 	{
-		cerr << "File not available! \n";
-		exit(0);
+		ofstream newFile;
+		file.open("HighScore.txt");
+		if (file.good()) {
+			file << '0';
+		}
+		return 0;
 	}
-	else
-	{
-		getline(file, buffor);
-	}
-
-	highScore = stoi(buffor);
+	
+	getline(file, buffor);
 	file.close();
-
-	return highScore;
-}
-
-void ScoreManager::Tick() {
-	// todo: Do zrobienia
+	try {
+		return stoi(buffor);
+	}
+	catch (exception e) {
+		ofstream newFile;
+		file.open("HighScore.txt");
+		if (file.good()) {
+			file << '0';
+		}
+		return 0;
+	}
 }
 
 void ScoreManager::saveHighScore(int score)
 {
+	fstream file;
 	file.open("HighScore.txt", ios::out);
-
-	if (!file.good())
-	{
-		cerr << "File not available! \n";
-		exit(0);
-	}
-	else
+	if (file.good())
 	{
 		file << score;
+		file.close();
+		return;
 	}
 
-	file.close();
+	ofstream newFile;
+	file.open("HighScore.txt");
+	if (file.good()) {
+		file << '0';
+	}
 }

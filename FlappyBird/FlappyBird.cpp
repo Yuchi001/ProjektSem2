@@ -1,10 +1,15 @@
 #include "GameInstance.h"
+#include <Windows.h>
 
 using namespace std;
 
+bool StartGame() {
+	const auto gameInstance = new GameInstance();
+	return gameInstance->Start();
+}
 
 int main()
 {
-	const auto gameInstance = new GameInstance();
-	gameInstance->Start();
+	while (StartGame());
+	exit(0);
 }
