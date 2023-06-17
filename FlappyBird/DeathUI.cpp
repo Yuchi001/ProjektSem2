@@ -28,11 +28,6 @@ void DeathUI::Tick() {
 		this->SetActive(false);
 		gameInstance->Restart();
 	}
-	if (GetKeyState(ESC_KEY) & 0x8000)
-	{
-		this->SetActive(false);
-		gameInstance->End();
-	}
 }
 
 char DeathUI::GetConfiguredChar_override(Vector2 charPos) {

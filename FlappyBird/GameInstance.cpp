@@ -10,13 +10,13 @@
 #include "ScoreManager.h"
 #include "UIObject.h"
 #include "DeathUI.h"
+#include "StartUI.h"
 #include "ScoreUI.h"
 
 using namespace std;
 
 bool GameInstance::Start()
 {
-	shouldRestart = false;
 	Initialize();
 	while (IsPlaying)
 	{
@@ -32,10 +32,12 @@ void GameInstance::Initialize()
 	MainPlayer = new Player(GameObjects);
 	PipeManagerObject = new PipeManager(GameObjects, MainPlayer);
 	auto scoreUI = new ScoreUI(MainPlayer);
+	auto startUI = new StartUI(this);
 
 	GameObjects.push_back(MainPlayer);
 	GameObjects.push_back(PipeManagerObject);
 	GameObjects.push_back(scoreUI);
+	GameObjects.push_back(startUI);
 }
 
 void GameInstance::PrintBoard()
@@ -46,6 +48,12 @@ void GameInstance::PrintBoard()
 		for (int j = 0; j < boardSize.getX(); j++)
 		{
 			auto currentPos = Vector2(j, i);
+			if ((currentPos.getX() == 0 
+				|| currentPos.getX() == boardSize.getX() - 1)
+				&& i != 0) {
+				cout << '|';
+				continue;
+			}
 
 			if (PrintUI(currentPos)) continue;
 
@@ -60,6 +68,8 @@ void GameInstance::PrintBoard()
 bool GameInstance::PrintUI(Vector2 currentPos) {
 	for (auto gameObject : GameObjects)
 	{
+		if (!gameObject->IsActive()) continue;
+
 		if (gameObject->GetType() != EObjectType::eEntity)
 			continue;
 
@@ -81,7 +91,6 @@ bool GameInstance::PrintUI(Vector2 currentPos) {
 bool GameInstance::PrintEntities(Vector2 currentPos) {
 	for (auto gameObject : GameObjects)
 	{
-
 		if (gameObject->GetType() != eEntity)
 			continue;
 
@@ -111,8 +120,8 @@ void GameInstance::GameLoop()
 
 	Tools::PrintMenu();
 	PrintBoard();
-	cout << '\n';
-	cout << MainPlayer->getPosition()[0] << '\n' << GameObjects.size();
+	Tools::PrintSubMenu();
+	//cout << MainPlayer->getPosition()[0] << '\n' << GameObjects.size(); // Debug print
 	for (auto gameObject : GameObjects)
 	{
 		if (gameObject->GetType() == eManager)

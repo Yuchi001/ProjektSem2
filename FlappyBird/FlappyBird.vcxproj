@@ -138,6 +138,7 @@
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="ScoreManager.cpp" />
     <ClCompile Include="ScoreUI.cpp" />
+    <ClCompile Include="StartUI.cpp" />
     <ClCompile Include="Tools.cpp" />
     <ClCompile Include="UIObject.cpp" />
     <ClCompile Include="Vector2.cpp" />
@@ -154,6 +155,7 @@
     <ClInclude Include="Player.h" />
     <ClInclude Include="ScoreManager.h" />
     <ClInclude Include="ScoreUI.h" />
+    <ClInclude Include="StartUI.h" />
     <ClInclude Include="Tools.h" />
     <ClInclude Include="UIObject.h" />
     <ClInclude Include="Vector2.h" />

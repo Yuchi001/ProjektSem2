@@ -30,6 +30,11 @@ void Tools::PrintMenu()
 	for (int i = 0; i < xSize; i++) std::cout << "=";
 }
 
+void Tools::PrintSubMenu() {
+	int xSize = GameSettings::boardSize_x;
+	for (int i = 0; i < xSize; i++) std::cout << "=";
+}
+
 
 std::vector<int> Tools::ValueToArray(int val) {
 	if (val < 10)

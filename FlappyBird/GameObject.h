@@ -11,6 +11,7 @@ public:
 	virtual void Tick() = 0;
 
 	void SetActive(bool active);
+	bool IsActive();
 
 	std::string GetName();
 	EObjectType GetType();

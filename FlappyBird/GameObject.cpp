@@ -22,3 +22,6 @@ void GameObject::SetActive(bool active)
 	this->active = active;
 }
 
+bool GameObject::IsActive() {
+	return active;
+}
