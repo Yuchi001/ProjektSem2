@@ -19,8 +19,6 @@ private:
 	int scoreCount = 0;
 	int highscoreCount = 0;
 
-	static const int SPACE_KEY = 32;
-
 	vector<int> scoreParams;
 	vector<int> highscoreParams;
 

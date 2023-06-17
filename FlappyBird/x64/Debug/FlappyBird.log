@@ -1,3 +1,2 @@
-﻿  GameInstance.cpp
-C:\Users\Yuhi\ProjektSem2\FlappyBird\ScoreManager.h(12,2): warning C4091: 'static ': ignored on left of 'ScoreManager' when no variable is declared
+﻿  Player.cpp
   FlappyBird.vcxproj -> C:\Users\Yuhi\ProjektSem2\FlappyBird\x64\Debug\FlappyBird.exe

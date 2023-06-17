@@ -23,7 +23,7 @@ void DeathUI::Tick() {
 
 	if (!active) return;
 
-	if (GetKeyState(SPACE_KEY) & 0x8000)
+	if (GetKeyState(VK_RETURN) & 0x8000)
 	{
 		this->SetActive(false);
 		gameInstance->Restart();

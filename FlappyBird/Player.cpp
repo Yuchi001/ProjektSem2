@@ -1,9 +1,12 @@
 #include "Player.h"
 #include <conio.h>
 #include <Windows.h>
+#include <iostream>
 
 #include "GameSettings.h"
 #include "Pipe.h"
+
+using namespace std;
 
 Player::Player(std::vector<GameObject*>& gameObjects)
 {
@@ -30,8 +33,11 @@ int Player::checkScore(Vector2 currentPos)
 			continue;
 
 		auto entity = (Entity*)gameObject;
+		auto success = entity->getPosition()[0].getX() == currentPos.getX();
 		
-		return entity->getPosition()[0].getX() == currentPos.getX();
+		if (success) Beep(1318, GameSettings::refreshRate);
+
+		return success;
 	}
 	return 0;
 }

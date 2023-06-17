@@ -8,12 +8,12 @@ StartUI::StartUI(GameInstance* game): UIObject("StartUI.txt", '#') {
 void StartUI::Tick() {
 	if (gameInstance == nullptr || !active) return;
 
-	if (GetKeyState(SPACE_KEY) & 0x8000)
+	if (GetKeyState(VK_SPACE) & 0x8000)
 	{
 		SetActive(false);
 	}
 
-	if (GetKeyState(ESC_KEY) & 0x8000)
+	if (GetKeyState(VK_ESCAPE) & 0x8000)
 	{
 		this->SetActive(false);
 		gameInstance->End();

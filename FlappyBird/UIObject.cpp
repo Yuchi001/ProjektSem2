@@ -9,7 +9,7 @@
 using namespace std;
 
 UIObject::UIObject(string fileName, char errorChar) {
-    readUI(GameSettings::filePath + fileName);
+    readUI(GameSettings::filePath_UI + fileName);
     entityType = EEntityType::eUI;
     this->errorChar = errorChar;
 }

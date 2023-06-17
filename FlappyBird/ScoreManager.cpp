@@ -5,7 +5,6 @@
 #include <string> 
 #include <fstream>
 
-
 int ScoreManager::getHighScore()
 {
 	fstream file;
