@@ -4,11 +4,18 @@
 #include <sstream>
 #include <vector>
 #include <fstream>
+#include <Windows.h>
 #include "GameSettings.h"
 
 using namespace std;
 
 UIObject::UIObject(string fileName, char errorChar) {
+    //conversion from string to wstring -> to LPCWSTR
+    auto uiPath = GameSettings::filePath_UI;
+    auto uiPath_wstring = wstring(uiPath.begin(), uiPath.end());
+    CreateDirectory(uiPath_wstring.c_str(), NULL);
+    //dir safety
+
     readUI(GameSettings::filePath_UI + fileName);
     entityType = EEntityType::eUI;
     this->errorChar = errorChar;
@@ -24,6 +31,12 @@ void UIObject::readUI(string fileName)
     int lines = 0;
     
     ifstream file(fileName);
+    if (!file.good()) {
+        board = vector<string>({ fileName + " not found!" });
+        offset = Vector2::zero;
+        return;
+    }
+
     while (getline(file, line)) {
         if (offset_red) {
             board.push_back(line);

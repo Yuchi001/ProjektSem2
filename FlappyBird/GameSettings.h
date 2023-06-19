@@ -11,5 +11,6 @@ public:
 	static const int boardSize_y;
 	static const int pipeSpawnTickRate;
 	static const std::string filePath_UI;
+	static const std::string filePath_data;
 };
 

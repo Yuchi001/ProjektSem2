@@ -12,3 +12,5 @@ const int GameSettings::boardSize_y = ((Vector2)boardSize).getY();
 const int GameSettings::pipeSpawnTickRate = 16;
 
 const std::string GameSettings::filePath_UI = "./UI/";
+
+const std::string GameSettings::filePath_data= "./Data/";
